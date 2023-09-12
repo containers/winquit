@@ -94,4 +94,7 @@ func verifyExit(cmd *exec.Cmd, timeout int, outcome bool) {
 	}
 
 	Expect(result).To(Equal(outcome))
+	if !outcome {
+		cmd.Process.Kill()
+	}
 }
