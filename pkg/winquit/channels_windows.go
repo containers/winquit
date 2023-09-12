@@ -7,7 +7,7 @@ import (
 
 type baseChannelType interface {
 	getKey() any
-	notifyNonBlocking() 
+	notifyNonBlocking()
 	notifyBlocking()
 }
 

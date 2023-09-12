@@ -24,14 +24,14 @@ func RequestQuit(pid int) error {
 
 func QuitProcess(pid int, waitNicely time.Duration) error {
 	_ = RequestQuit(pid)
-	
+
 	proc, err := os.FindProcess(pid)
 	if err != nil {
 		return nil
 	}
 
 	done := make(chan bool)
-	
+
 	go func() {
 		proc.Wait()
 		done <- true

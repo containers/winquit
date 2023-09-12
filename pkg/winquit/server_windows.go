@@ -23,7 +23,7 @@ var (
 	receivers *receiversType = &receiversType{
 		channels: make(map[any]baseChannelType),
 	}
-	
+
 	loopInit sync.Once
 )
 
@@ -138,4 +138,3 @@ func registerDummyWindow() error {
 
 	return nil
 }
-
