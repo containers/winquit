@@ -10,8 +10,10 @@ function runCommand {
 }
 
 function cleanProject {
-    Write-Host "removing bin"
-    Remove-Item -Force -Recurse -Path .\bin -ErrorAction Ignore 
+    if (Test-Path -Path .\bin) {
+        Write-Host "removing bin"
+        Remove-Item -Force -Recurse -Path .\bin
+    }
 }
 
 function testProject {
