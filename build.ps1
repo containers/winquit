@@ -14,9 +14,13 @@ function cleanProject {
         Write-Host "removing bin"
         Remove-Item -Force -Recurse -Path .\bin
     }
+    runCommand "go clean -testcache"
 }
 
 function testProject {
+    if ((Test-Path -Path .\bin\winquit.exe) -eq $false) {
+        buildProject
+    }
     runCommand "go test -v ./test"
 }
 
