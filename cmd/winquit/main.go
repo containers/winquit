@@ -25,6 +25,8 @@ func main() {
 		simpleServer()
 	case "signal-server":
 		signalServer()
+	case "multi-server":
+		multiServer()
 	case "hang-server":
 		hangServer()
 	case "request-quit":
@@ -70,6 +72,7 @@ func printUsage() {
 	fmt.Printf("%s simple-server\n", os.Args[0])
 	fmt.Printf("%s signal-server\n", os.Args[0])
 	fmt.Printf("%s hang-server\n", os.Args[0])
+	fmt.Printf("%s multi-server\n", os.Args[0])
 	fmt.Printf("%s request-quit (pid)\n", os.Args[0])
 	fmt.Printf("%s demand-quit (pid) (timeout in secs)\n", os.Args[0])
 }
@@ -87,6 +90,21 @@ func simpleServer() {
 	done := make(chan bool)
 	winquit.NotifyOnQuit(done)
 	logrus.Infof("Received: %v", <-done)
+}
+
+func multiServer() {
+	logrus.Info("Server waiting using multiple boolean approach")
+	var chans []chan bool
+
+	for i := 0; i < 5; i++ {
+		channel := make(chan bool, 1)
+		chans = append(chans, channel)
+		winquit.NotifyOnQuit(channel)
+	}
+
+	for _, channel := range chans {
+		logrus.Infof("Received: %v", <-channel)
+	}
 }
 
 func hangServer() {

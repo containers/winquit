@@ -38,6 +38,13 @@ var _ = Describe("client", func() {
 })
 
 var _ = Describe("client", func() {
+	It("request quit kills winquit multi-server", func() {
+		cmd := exec.Command(WINQUIT_PATH, "multi-server")
+		verifyRequestQuit(cmd, 5, true)
+	})
+})
+
+var _ = Describe("client", func() {
 	It("request quit kills winquit signal server", func() {
 		cmd := exec.Command(WINQUIT_PATH, "signal-server")
 		verifyRequestQuit(cmd, 5, true)
