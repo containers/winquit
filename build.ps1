@@ -6,7 +6,12 @@ function runCommand {
     )
 
     Write-Host $command
-    Invoke-Expression $command   
+    $command += ';$LASTEXITCODE'
+    $result = Invoke-Expression $command
+    if ($result -ne 0) {
+        Write-Host "Command failed (exit: $result)"
+        Exit $result
+    }
 }
 
 function cleanProject {
