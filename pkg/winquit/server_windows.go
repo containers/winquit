@@ -10,6 +10,7 @@ import (
 
 	"github.com/containers/winquit/pkg/winquit/win32"
 	"github.com/sirupsen/logrus"
+	"golang.org/x/sys/windows"
 )
 
 type receiversType struct {
@@ -25,6 +26,7 @@ var (
 	}
 
 	loopInit sync.Once
+	loopTid  uint32
 )
 
 func (r *receiversType) add(channel baseChannelType) {
@@ -75,10 +77,15 @@ func simulateSigTermOnQuit(handler chan os.Signal) {
 	initLoop()
 }
 
+func getCurrentMessageLoopThreadId() uint32 {
+	return loopTid
+}
+
 func messageLoop() {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
+	loopTid = windows.GetCurrentThreadId()
 	registerDummyWindow()
 
 	logrus.Debug("Entering loop for quit")
