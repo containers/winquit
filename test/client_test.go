@@ -9,7 +9,7 @@ import (
     "path/filepath"
     "time"
 
-    "github.com/n1hility/winquit/pkg/winquit"
+    "github.com/containers/winquit/pkg/winquit"
     . "github.com/onsi/ginkgo/v2"
     . "github.com/onsi/gomega"
 )

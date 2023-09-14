@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/n1hility/winquit/pkg/winquit"
+	"github.com/containers/winquit/pkg/winquit"
 	"github.com/sirupsen/logrus"
 )
 

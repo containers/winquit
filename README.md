@@ -223,7 +223,7 @@ Ran 7 of 7 Specs in 3.082 seconds
 SUCCESS! -- 7 Passed | 0 Failed | 0 Pending | 0 Skipped
 --- PASS: TestTest (3.09s)
 PASS
-ok      github.com/n1hility/winquit/test        3.234s
+ok      github.com/containers/winquit/test        3.234s
 ```
 
 ### Building on Linux/Unix 

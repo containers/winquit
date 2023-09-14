@@ -1,4 +1,4 @@
-module github.com/n1hility/winquit
+module github.com/containers/winquit
 
 go 1.19
 

@@ -8,7 +8,7 @@ import (
     "sync"
     "syscall"
 
-    "github.com/n1hility/winquit/pkg/winquit/win32"
+    "github.com/containers/winquit/pkg/winquit/win32"
     "github.com/sirupsen/logrus"
 )
 
