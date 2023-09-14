@@ -1,7 +1,7 @@
 package winquit
 
 import (
-    "os"
+	"os"
 )
 
 // NotifyOnQuit relays a Windows quit notification to the boolean done channel.
@@ -20,7 +20,7 @@ import (
 // If this function is called after a Windows quit notification has occurred, it
 // will immediately deliver a "true" value.
 func NotifyOnQuit(done chan bool) {
-    notifyOnQuit(done)
+	notifyOnQuit(done)
 }
 
 // SimulateSigTermOnQuit relays a Windows quit notification following the same
@@ -30,5 +30,5 @@ func NotifyOnQuit(done chan bool) {
 // This function allows for the reuse of the same underlying channel used with
 // in a separate os.signal.Notify method call.
 func SimulateSigTermOnQuit(handler chan os.Signal) {
-    simulateSigTermOnQuit(handler)
+	simulateSigTermOnQuit(handler)
 }
