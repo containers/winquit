@@ -81,7 +81,7 @@ func messageLoop() {
 
 	registerDummyWindow()
 
-	logrus.Info("Entering loop for quit")
+	logrus.Debug("Entering loop for quit")
 	for {
 		ret, msg, err := win32.GetMessage(0, 0, 0)
 		if err != nil {
