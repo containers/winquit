@@ -21,19 +21,19 @@ for example, break handling in console applications).
 The following example demonstrates usage of NotifyOnQuit() to wait for a
 windows quit event before shutting down:
 
-```
+```golang
 func server() {
     fmt.Println("Starting server")
 
-    Create a channel, and register it
+    // Create a channel, and register it
     done := make(chan bool, 1)
     winquit.NotifyOnQuit(done)
 
-    Wait until we receive a quit event
+    // Wait until we receive a quit event
     <-done
 
     fmt.Println("Shutting down")
-    Perform cleanup tasks
+    // Perform cleanup tasks
 }
 ```
 
@@ -42,24 +42,24 @@ func server() {
 The following example demonstrates usage of SimulateSigTermOnQuit() in
 concert with signal.Notify():
 
-```
+```golang
 func server() {
     fmt.Println("Starting server")
 
-    Create a channel, and register it
+    // Create a channel, and register it
     done := make(chan os.Signal, 1)
 
-    Wait on console interrupt events
+    // Wait on console interrupt events
     signal.Notify(done, syscall.SIGINT)
 
-    Simulate SIGTERM when a quit occurs
+    // Simulate SIGTERM when a quit occurs
     winquit.SimulateSigTermOnQuit(done)
 
-    Wait until we receive a signal or quit event
+    // Wait until we receive a signal or quit event
     <-done
 
     fmt.Println("Shutting down")
-    Perform cleanup tasks
+    // Perform cleanup tasks
 }
 ```
 
@@ -68,22 +68,21 @@ func server() {
 The following example demonstrates how an application can ask or
 force other windows programs to quit:
 
-```
+```golang
 func client() {
-        Ask nicely for program "one" to quit. This request may not
-        be honored if its a console application, or if the program
-        is hung
-        if err := winquit.RequestQuit(pidOne); err != nil {
-            fmt.Printf("error sending quit request, %s", err.Error())
-        }
+    // Ask nicely for program "one" to quit. This request may not
+    // be honored if its a console application, or if the program
+    // is hung
+    if err := winquit.RequestQuit(pidOne); err != nil {
+        fmt.Printf("error sending quit request, %s", err.Error())
+    }
 
-        Force program "two" to quit, but give it 20 seconds to
-        perform any cleanup tasks and quit on it's own
-        timeout := time.Second * 20
-        if err := winquit.QuitProcess(pidTwo, timeout); err != nil {
-            fmt.Printf("error killing process, %s", err.Error())
-        }
-}
+    // Force program "two" to quit, but give it 20 seconds to
+    // perform any cleanup tasks and quit on it's own
+    timeout := time.Second * 20
+    if err := winquit.QuitProcess(pidTwo, timeout); err != nil {
+        fmt.Printf("error killing process, %s", err.Error())
+    }
 ```
 
 ## Command-line tool
