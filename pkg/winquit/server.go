@@ -32,3 +32,14 @@ func NotifyOnQuit(done chan bool) {
 func SimulateSigTermOnQuit(handler chan os.Signal) {
 	simulateSigTermOnQuit(handler)
 }
+
+// Returns the thread id of the message loop thread created by winquit, or "0"
+// if one is not running. The latter indicates a mistake, as this function
+// should only be called after a call to one of the _OnQuit functions.
+//
+// In most cases this method should not be necessary, as RequestQuit and
+// QuitProcess do not require it. It is primarily provided to enable legacy
+// patterns that serialize the thread id for later direct signaling.
+func GetCurrentMessageLoopThreadId() uint32 {
+	return getCurrentMessageLoopThreadId()
+}
