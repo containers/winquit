@@ -1,7 +1,7 @@
 # winquit
 
 winquit is a golang module that supports graceful shutdown of Windows
-applications through the sending and receiving Windows quit events on Win32
+applications through the sending and receiving Windows of quit events on Win32
 message queues. This allows golang applications to implement behavior comparable
 to SIGTERM signal handling on UNIX derived systems. Additionally, it supports
 the graceful shutdown mechanism employed by Windows system tools, such as
