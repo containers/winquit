@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"syscall"
 	"time"
@@ -68,13 +69,14 @@ func demandQuit() {
 }
 
 func printUsage() {
-	fmt.Printf("%s [COMMAND] [ARG...] \n", os.Args[0])
-	fmt.Printf("%s simple-server\n", os.Args[0])
-	fmt.Printf("%s signal-server\n", os.Args[0])
-	fmt.Printf("%s hang-server\n", os.Args[0])
-	fmt.Printf("%s multi-server\n", os.Args[0])
-	fmt.Printf("%s request-quit (pid)\n", os.Args[0])
-	fmt.Printf("%s demand-quit (pid) (timeout in secs)\n", os.Args[0])
+	executable := filepath.Base(os.Args[0])
+	fmt.Printf("Usage: %s [COMMAND] [ARG...] \n\n", executable)
+	fmt.Printf("  simple-server               start a server which waits on a boolean channel\n")
+	fmt.Printf("  signal-server               start a server which waits on a simulated SIGTERM\n")
+	fmt.Printf("  hang-server                 start a server which ignores quit messages\n")
+	fmt.Printf("  multi-server                start a server with multiple channels subscribed\n")
+	fmt.Printf("  request-quit  (pid)         ask another process to quit\n")
+	fmt.Printf("  demand-quit   (pid) (secs)  first ask, then kill at timeout\n")
 }
 
 func signalServer() {
