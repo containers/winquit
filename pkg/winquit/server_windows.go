@@ -65,12 +65,12 @@ func initLoop() {
 	})
 }
 
-func NotifyOnQuit(done chan bool) {
+func notifyOnQuit(done chan bool) {
 	receivers.add(&boolChannelType{done})
 	initLoop()
 }
 
-func SimulateSigTermOnQuit(handler chan os.Signal) {
+func simulateSigTermOnQuit(handler chan os.Signal) {
 	receivers.add(&sigChannelType{handler})
 	initLoop()
 }

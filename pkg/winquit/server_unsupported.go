@@ -3,8 +3,12 @@
 
 package winquit
 
-import "github.com/sirupsen/logrus"
+import (
+	"os"
+)
 
-func NotifyOnQuit(done chan bool) {
-	logrus.Warn("Called NotifyOnQuit(): not implemented on Non-Windows")
+func notifyOnQuit(done chan bool) {
+}
+
+func simulateSigTermOnQuit(handler chan os.Signal) {
 }

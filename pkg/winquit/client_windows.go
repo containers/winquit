@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func RequestQuit(pid int) error {
+func requestQuit(pid int) error {
 	threads, err := win32.GetProcThreads(uint32(pid))
 	if err != nil {
 		return err
@@ -22,7 +22,7 @@ func RequestQuit(pid int) error {
 	return nil
 }
 
-func QuitProcess(pid int, waitNicely time.Duration) error {
+func quitProcess(pid int, waitNicely time.Duration) error {
 	_ = RequestQuit(pid)
 
 	proc, err := os.FindProcess(pid)
