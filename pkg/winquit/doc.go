@@ -17,64 +17,64 @@
 // The following example demonstrates usage of NotifyOnQuit() to wait for a
 // windows quit event before shutting down:
 //
-//	func server() {
-//	    fmt.Println("Starting server")
+//    func server() {
+//        fmt.Println("Starting server")
 //
-//	    // Create a channel, and register it
-//	    done := make(chan bool, 1)
-//	    winquit.NotifyOnQuit(done)
+//        // Create a channel, and register it
+//        done := make(chan bool, 1)
+//        winquit.NotifyOnQuit(done)
 //
-//	    // Wait until we receive a quit event
-//	    <-done
+//        // Wait until we receive a quit event
+//        <-done
 //
-//	    fmt.Println("Shutting down")
-//	    // Perform cleanup tasks
-//	}
+//        fmt.Println("Shutting down")
+//        // Perform cleanup tasks
+//    }
 //
 // # Blended signal example
 //
 // The following example demonstrates usage of SimulateSigTermOnQuit() in
 // concert with signal.Notify():
 //
-//	func server() {
-//	    fmt.Println("Starting server")
+//    func server() {
+//        fmt.Println("Starting server")
 //
-//	    // Create a channel, and register it
-//	    done := make(chan os.Signal, 1)
+//        // Create a channel, and register it
+//        done := make(chan os.Signal, 1)
 //
-//	    // Wait on console interrupt events
-//	    signal.Notify(done, syscall.SIGINT)
+//        // Wait on console interrupt events
+//        signal.Notify(done, syscall.SIGINT)
 //
-//	    // Simulate SIGTERM when a quit occurs
-//	    winquit.SimulateSigTermOnQuit(done)
+//        // Simulate SIGTERM when a quit occurs
+//        winquit.SimulateSigTermOnQuit(done)
 //
-//	    // Wait until we receive a signal or quit event
-//	    <-done
+//        // Wait until we receive a signal or quit event
+//        <-done
 //
-//	    fmt.Println("Shutting down")
-//	    // Perform cleanup tasks
-//	}
+//        fmt.Println("Shutting down")
+//        // Perform cleanup tasks
+//    }
 //
 // # Client example
 //
 // The following example demonstrates how an application can ask or
 // force other windows programs to quit:
 //
-//	func client() {
-//	     // Ask nicely for program "one" to quit. This request may not
-//	     // be honored if its a console application, or if the program
-//	     // is hung
-//	     if err := winquit.RequestQuit(pidOne); err != nil {
-//	         fmt.Printf("error sending quit request, %s", err.Error())
-//	     }
+//    func client() {
+//         // Ask nicely for program "one" to quit. This request may not
+//         // be honored if its a console application, or if the program
+//         // is hung
+//         if err := winquit.RequestQuit(pidOne); err != nil {
+//             fmt.Printf("error sending quit request, %s", err.Error())
+//         }
 //
-//	     // Force program "two" to quit, but give it 20 seconds to
-//	     // perform any cleanup tasks and quit on it's own
-//	     timeout := time.Second * 20
-//	     if err := winquit.QuitProcess(pidTwo, timeout); err != nil {
-//	         fmt.Printf("error killing process, %s", err.Error())
-//	     }
-//	}
+//         // Force program "two" to quit, but give it 20 seconds to
+//         // perform any cleanup tasks and quit on it's own
+//         timeout := time.Second * 20
+//         if err := winquit.QuitProcess(pidTwo, timeout); err != nil {
+//             fmt.Printf("error killing process, %s", err.Error())
+//         }
+//    }
 //
 // # How it works
 //

@@ -1,7 +1,7 @@
 package winquit
 
 import (
-	"time"
+    "time"
 )
 
 // RequestQuit sends a Windows quit notification to the specified process id.
@@ -17,7 +17,7 @@ import (
 // Callers must have appropriate security permissions, otherwise an error will
 // be returned. See the notes in the package documentation for more details.
 func RequestQuit(pid int) error {
-	return requestQuit(pid)
+    return requestQuit(pid)
 }
 
 // QuitProcess first sends a Windows quit notification to the specified process id,
@@ -27,5 +27,5 @@ func RequestQuit(pid int) error {
 // Callers must have appropriate security permissions, otherwise an error will
 // be returned. See the notes in the package documentation for more details.
 func QuitProcess(pid int, waitNicely time.Duration) error {
-	return quitProcess(pid, waitNicely)
+    return quitProcess(pid, waitNicely)
 }

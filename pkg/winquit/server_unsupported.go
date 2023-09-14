@@ -4,7 +4,7 @@
 package winquit
 
 import (
-	"os"
+    "os"
 )
 
 func notifyOnQuit(done chan bool) {
