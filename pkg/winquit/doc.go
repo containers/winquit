@@ -1,9 +1,9 @@
-// Package winquit supports graceful application shutdown on Windows through the
-// sending and receiving of Windows quit events on Win32 message queues. This
-// allows golang applications to implement behavior comparable to SIGTERM signal
-// handling on UNIX derived systems. Additionally it supports the graceful
-// shutdown mechanism employed by Windows system tools, such as taskkill. See
-// the "How it works" section for more details.
+// Package winquit supports graceful shutdown of Windows applications through
+// the sending and receiving of Windows quit events on Win32 message queues.
+// This allows golang applications to implement behavior comparable to SIGTERM
+// signal handling on UNIX derived systems. Additionally, it supports the
+// graceful shutdown mechanism employed by Windows system tools, such as
+// taskkill. See the "How it works" section for more details.
 //
 // To aid application portability, and provide familiarity, the API follows a
 // similar convention and approach as the os.signal package. Additionally, the
@@ -85,7 +85,7 @@
 // windows and threads owned by other applications, including common desktop
 // components.
 //
-// Winquit utilizes this mechanism by creating a standard win32 message loop
+// winquit utilizes this mechanism by creating a standard win32 message loop
 // thread and registering a non-visible window to relay a quit message (WM_QUIT)
 // in the event of a window close event. WM_CLOSE is sent by Windows in response
 // to certain system events, or by other requesting applications. For example,
@@ -97,7 +97,7 @@
 // provided by winquit *do not* require compilation as a windowsgui app to
 // effectively use them.
 //
-// Winquit also provides APIs to trigger a quit of another process using a
+// winquit also provides APIs to trigger a quit of another process using a
 // WM_CLOSE event, although in a more efficient manner than taskkill.exe. It
 // instead captures a thread snapshot of the target process (effectively a
 // memory read on Windows), and enumerates each thread's associated Windows, and
