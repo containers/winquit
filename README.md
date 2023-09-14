@@ -7,6 +7,10 @@ to SIGTERM signal handling on UNIX derived systems. Additionally, it supports
 the graceful shutdown mechanism employed by Windows system tools, such as
 `taskkill.exe`. See the [How it works](#how-it-works) section for more details.
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/containers/winquit.svg)](https://pkg.go.dev/github.com/containers/winquit)
+[![CI](https://github.com/containers/winquit/actions/workflows/ci.yml/badge.svg)](https://github.com/containers/winquit/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/containers/winquit)](https://goreportcard.com/report/github.com/containers/winquit)
+
 ## Overview
 
 To aid application portability, and provide familiarity, the API follows a
