@@ -6,8 +6,9 @@ function runCommand {
     )
 
     Write-Host $command
-    $command += ';$LASTEXITCODE'
-    $result = Invoke-Expression $command
+
+    Invoke-Expression $command
+    $result = $LASTEXITCODE
     if ($result -ne 0) {
         Write-Host "Command failed (exit: $result)"
         Exit $result
