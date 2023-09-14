@@ -16,8 +16,8 @@ import (
 
 var WINQUIT_PATH = filepath.Join("..", "bin", "winquit.exe")
 
-const SHOULD_TIME = 10
-const WONT_TIME = 5
+const SHOULD_TIME = 5
+const WONT_TIME = 3
 
 var _ = Describe("perquisites", func() {
 	It("winquit binary is built", func() {
@@ -29,35 +29,35 @@ var _ = Describe("perquisites", func() {
 var _ = Describe("client", func() {
 	It("request quit should kill thidparty(winver) process", func() {
 		cmd := exec.Command("winver")
-		verifyRequestQuit(cmd, SHOULD_TIME, true)
+		verifyRequestQuit(cmd, 3, SHOULD_TIME, true)
 	})
 })
 
 var _ = Describe("client", func() {
 	It("request quit kills winquit simple server", func() {
 		cmd := exec.Command(WINQUIT_PATH, "simple-server")
-		verifyRequestQuit(cmd, SHOULD_TIME, true)
+		verifyRequestQuit(cmd, 0, SHOULD_TIME, true)
 	})
 })
 
 var _ = Describe("client", func() {
 	It("request quit kills winquit multi-server", func() {
 		cmd := exec.Command(WINQUIT_PATH, "multi-server")
-		verifyRequestQuit(cmd, SHOULD_TIME, true)
+		verifyRequestQuit(cmd, 0, SHOULD_TIME, true)
 	})
 })
 
 var _ = Describe("client", func() {
 	It("request quit kills winquit signal server", func() {
 		cmd := exec.Command(WINQUIT_PATH, "signal-server")
-		verifyRequestQuit(cmd, SHOULD_TIME, true)
+		verifyRequestQuit(cmd, 0, SHOULD_TIME, true)
 	})
 })
 
 var _ = Describe("client", func() {
 	It("request quit does not kill winquit hang server", func() {
 		cmd := exec.Command(WINQUIT_PATH, "hang-server")
-		verifyRequestQuit(cmd, WONT_TIME, false)
+		verifyRequestQuit(cmd, 0, WONT_TIME, false)
 	})
 })
 
@@ -68,8 +68,11 @@ var _ = Describe("client", func() {
 	})
 })
 
-func verifyRequestQuit(cmd *exec.Cmd, timeout int, outcome bool) {
+func verifyRequestQuit(cmd *exec.Cmd, preTimeout int, timeout int, outcome bool) {
 	verifyStart(cmd)
+    if preTimeout > 0 {
+        time.Sleep(time.Second * time.Duration(preTimeout))
+    }
 	winquit.RequestQuit(cmd.Process.Pid)
 	verifyExit(cmd, timeout, outcome)
 }
